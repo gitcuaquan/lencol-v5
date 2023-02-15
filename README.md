@@ -1,5 +1,5 @@
 
-#Lencol V5 -Threejs
+# Lencol V5 -Threejs {align=center}
 <ol>
     <li>Phát triển:Mạnh Quân</li>
     <li>Công nghệ :Nuxt 3, Threejs ,Fabric</li>
