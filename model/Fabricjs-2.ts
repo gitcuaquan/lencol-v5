@@ -2,11 +2,11 @@ import { fabric } from "fabric";
 
 export default class Frabric {
   //thuộc tính classs
-  private canvas: fabric.Canvas;
-  private canvasExport: fabric.StaticCanvas;
+  public canvas: fabric.Canvas;
+  public canvasExport: fabric.StaticCanvas;
+  public image: fabric.Image;
   private width: number = 800;
   private height: number = 800;
-  private image: fabric.Image;
   // --- khởi tạo cần
   constructor(canvas: HTMLCanvasElement, canvasExport: HTMLCanvasElement) {
     this.CustomFrabricJs();
@@ -68,6 +68,7 @@ export default class Frabric {
     });
   }
   public AddImage(url: string) {
+    console.log("📢📢 >>> file: Fabricjs-2.ts:71 >>> Frabric >>> AddImage >>> url", url)
     fabric.Image.fromURL(url, (image: fabric.Image) => {
       var newOptions = this.ResizeImage(image);
       image.set({

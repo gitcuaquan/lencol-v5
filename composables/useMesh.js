@@ -1,5 +1,19 @@
 export default function useMesh() {
-  const meshSelected = useState("meshSelected", () => {});
+  const meshSelected = useState("meshSelected", () => ({
+    name: "Font",
+    meshName: "A",
+    canvasExport: {
+      x: 2,
+      y: 3,
+      w: 4,
+      h: 5,
+    },
+    link: "/Women T-Shirt/overlay/front.png",
+    canvas: null,
+    canvas_export:null,
+    image: '/img/anh.jpeg',
+  }));
+
   const meshList = useState("meshList", () => [
     {
       name: "Font",
@@ -11,6 +25,9 @@ export default function useMesh() {
         h: 5,
       },
       link: "/Women T-Shirt/overlay/front.png",
+      canvas: null,
+      canvas_export:null,
+      image: '/img/anh.jpeg',
     },
     {
       name: "Back",
@@ -22,9 +39,12 @@ export default function useMesh() {
         h: 5,
       },
       link: "/Women T-Shirt/overlay/back.png",
+      canvas: null,
+      canvas_export:null,
+      image: null,
     },
     {
-      name: "Sleeve left",
+      name: "Sleeve Left",
       meshName: "C",
       canvasExport: {
         x: 2,
@@ -33,6 +53,9 @@ export default function useMesh() {
         h: 5,
       },
       link: "/Women T-Shirt/overlay/sleeve.png",
+      canvas: null,
+      canvas_export:null,
+      image: null,
     },
     {
       name: "Sleeve Right",
@@ -44,6 +67,9 @@ export default function useMesh() {
         h: 5,
       },
       link: "/Women T-Shirt/overlay/sleeve.png",
+      canvas: null,
+      canvas_export:null,
+      image: null,
     },
     {
       name: "Collar",
@@ -55,6 +81,9 @@ export default function useMesh() {
         h: 5,
       },
       link: "/Women T-Shirt/overlay/collar.png",
+      canvas: null,
+      canvas_export:null,
+      image: null,
     },
   ]);
 

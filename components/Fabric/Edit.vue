@@ -29,7 +29,7 @@ onMounted(() => {
     height: 100vh;
     background: #8780ac;
     display: flex;
-    padding-left: 160px;
+    padding-left: 100px;
     align-items: center;
 }
 </style>

@@ -14,10 +14,15 @@ import Frabric from '~~/model/Fabricjs-2';
 const fabricCanvas = ref()
 const wapperFabric = ref()
 const exportCanvas = ref()
+
+const { meshSelected } = useMesh()
+
 onMounted(() => {
     const FABRIC = new Frabric(fabricCanvas.value, exportCanvas.value)
-    FABRIC.SetOverlayImage('/Women T-Shirt/overlay/front.png')
-    FABRIC.AddImage('/img/anh.jpeg')
+    watch(meshSelected,()=>{
+        FABRIC.SetOverlayImage(meshSelected.value.link)
+        FABRIC.AddImage(meshSelected.value.image)
+    })
 })
 </script>
 

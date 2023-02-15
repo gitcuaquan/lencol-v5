@@ -1,14 +1,12 @@
 <template>
     <div class="lf--main-view_edit">
         <ToolMeshs />
-        <pre>
-            {{meshList}}
-        </pre>
+        <FabricEdit2/>
     </div>
 </template>
 
-<script setup lang="ts">
-const { meshSelected,meshList } = useMesh()
+<script setup >
+
 </script>
 
 <style scoped>
