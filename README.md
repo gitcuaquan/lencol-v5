@@ -1,42 +1,10 @@
-# Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+#<center>Lencol V5 -Threejs</center>
+<ol>
+    <li>Phát triển:Mạnh Quân</li>
+    <li>Công nghệ :Nuxt 3, Threejs ,Fabric</li>
+    <li>Ngôn ngữ: ts,js.html,css</li>
+</ol>
+<hr/>
+<small><i><center>@Bản quyển lenful 2023</center></i></small>
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

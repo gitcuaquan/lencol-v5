@@ -8,7 +8,7 @@
                     aria-selected="false">Layer</button>
             </div>
         </div>
-        <div class="tab-content pt-3" id="nav-tabContent">
+        <div class="tab-content pt-3" id="nav-tabContent" style="height: 90vh; overflow-y:auto">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                 <div class="row g-0" v-if="listPhoto.length">
                     <div v-for="item, index in listPhoto" :key="index" class="col-6 p-2">
