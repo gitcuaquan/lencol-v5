@@ -14,7 +14,8 @@ export default class ThreeJS {
   );
   private textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
   private ratio: number = 1;
-  private meshSelector: THREE.Mesh = new THREE.Mesh();
+  // private meshSelector: THREE.Mesh = new THREE.Mesh();
+  private meshList: Array<THREE.Mesh>;
   constructor(canvas: HTMLCanvasElement, wapper: HTMLCanvasElement) {
     this.init(canvas);
     this.Resize(wapper);
@@ -34,23 +35,24 @@ export default class ThreeJS {
    */
   private init(canvas: HTMLCanvasElement) {
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(50.0, this.ratio, 0.01, 10000);
-    this.camera.position.set(0.649,0.079,1.508);
+    this.camera = new THREE.PerspectiveCamera(35, this.ratio, 0.01, 10000);
+    this.camera.position.set(0.649, 0.079, 1.508);
     this.scene.add(this.camera);
     // this.Addlight([0, 10, 4]);
     // this.Addlight([0, 0, -3]);
     // this.Addlight([0, -5, 7.5]);
-    var light = new THREE.HemisphereLight(0xffffff, 0xe8e5fe, 1);
+    var light = new THREE.HemisphereLight(0xbeb4c5, 0xcce0e5, 1);
     this.light.position.set(0, 10, 0);
     this.scene.add(light);
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       preserveDrawingBuffer: true,
+      alpha: true,
     });
 
     this.renderer.render(this.scene, this.camera);
-    this.renderer.setClearColor(0xd1c4ff, 1);
+    // this.renderer.setClearColor(0xffffff, 1);
     this.control = new OrbitControls(this.camera, this.renderer.domElement);
     this.control.enableDamping = true;
     this.loader = new GLTFLoader();
@@ -62,50 +64,36 @@ export default class ThreeJS {
     light.castShadow = true;
     this.scene.add(light);
   }
-  public AddTexture(canvas: HTMLCanvasElement) {
-    const texture = new THREE.Texture(canvas);
+  public AddTexture(payload: any) {
+    const texture = new THREE.Texture(payload.canvas);
+    const meshName = payload.meshName;
+    const meshSelector = this.meshList.find((item) => item.name == meshName);
     texture.flipY = false;
     texture.needsUpdate = true;
     var material = new THREE.MeshBasicMaterial({ map: texture });
-    this.meshSelector.material = material;
+    if (meshSelector) {
+      meshSelector.material = material;
+    } else {
+      console.error(
+        "Không tìm thấy Mesh [" + meshName + "] trong model hiện tại"
+      );
+    }
   }
   /**
-   * Nó tải mô hình 3D từ một liên kết, sau đó nó nhận được tất cả các mắt lưới từ mô hình, và sau đó nó áp dụng một
-   * Kết cấu cho lưới với tên "A".
+   * Nó tải mô hình 3D từ một liên kết, sau đó nó nhận được tất cả các mắt lưới từ mô hình,
    *
-   * Vấn đề là kết cấu không được áp dụng cho lưới.
-   *
-   * Tôi đã cố gắng áp dụng kết cấu vào lưới theo những cách sau:
-   *
-   * 1.
-   *
-   * mesh.material.map = texture;
-   *
-   * 2.
-   *
-   * mesh.material.map = new THREE.TextureLoader().load('/img/anh.jpeg');
-   *
-   * 3.
-   *
-   * mesh.material.map = new THREE.TextureLoader().load('/img/anh.jpeg', function (texture) {
-   *   mesh.material.map = texture;
-   * });
-   *
-   * 4.
-   *
-   * mesh.material.map = new
    * @param {string} link - liên kết đến mô hình 3D
    */
   AddModel3D(link: string) {
     this.loader.load(link, (glb: any) => {
       this.scene.add(glb.scene);
-      const meshes = this.getAllMeshes(glb.scene);
-      for (var i = 0; i < meshes.length; i++) {
-        var mesh = meshes[i];
-        if (mesh.name == "A") {
-          this.meshSelector = mesh;
-        }
-      }
+      this.meshList = this.getAllMeshes(glb.scene);
+      // for (var i = 0; i < meshes.length; i++) {
+      //   var mesh = meshes[i];
+      //   if (mesh.name == "A") {
+      //     this.meshSelector = mesh;
+      //   }
+      // }
     });
   }
   /**
@@ -147,37 +135,21 @@ export default class ThreeJS {
     this.camera.aspect = this.ratio;
     this.camera.updateProjectionMatrix();
   }
-  public setCamera(position: Array<number>) {
-    console.log(
-      "📢📢 >>> file: Threejs.ts:151 >>> ThreeJS >>> setCamera >>> position",
-      position
-    );
-    if (position) {
-      this.camera.position.set(position[0], position[1], position[2]);
-    }
-  }
-  public setRotation(rotation: Array<number>) {
-    console.log(
-      "📢📢 >>> file: Threejs.ts:158 >>> ThreeJS >>> setRotation >>> rotation",
-      rotation
-    );
-    if (rotation) {
-      this.camera.rotation.set(rotation[0], rotation[1], rotation[2]);
-    }
-  }
   /**
    * Image3dTo2d
    */
-  public Image3dTo2d(position: Array<number>, rotation: Array<number>) {
-    var camera1 = new THREE.PerspectiveCamera(40, this.ratio, 0.1, 100000);
-    if (position) {
-      camera1.position.set(position[0], position[1], position[2]);
-    }
-    if (rotation) {
-      camera1.rotation.set(rotation[0], rotation[1], rotation[2]);
+  public Image3dTo2d(position?: Array<number>, rotation?: Array<number>) {
+    if (position && rotation) {
+      var camera1 = new THREE.PerspectiveCamera(40, this.ratio, 0.1, 100000);
+      if (position) {
+        camera1.position.set(position[0], position[1], position[2]);
+      }
+      if (rotation) {
+        camera1.rotation.set(rotation[0], rotation[1], rotation[2]);
+      }
+      this.renderer.render(this.scene, camera1);
     }
     // this.scene.add(camera1);
-    this.renderer.render(this.scene, camera1);
     return this.renderer.domElement.toDataURL();
   }
 }

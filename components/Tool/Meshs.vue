@@ -1,7 +1,7 @@
 <template>
     <div class="lf--tool-mesh">
         <ul>
-            <li v-for="item, index in meshList" :key="index" @click="selectMesh(item)">
+            <li v-for="item, index in meshList" class="btn btn-primary" :key="index" @click="selectMesh(item)">
                 <img :src="item.link" class="w-100" alt="">
             </li>
         </ul>
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { Mesh } from '~~/model/Type';
-const {setMeshSelected, meshList } = useMesh()
+const {setMeshSelected,meshSelected, meshList } = useMesh()
 
 const selectMesh = (item: Mesh) => {
     setMeshSelected(item)
@@ -20,9 +20,9 @@ const selectMesh = (item: Mesh) => {
 <style scoped>
 .lf--tool-mesh {
     position: absolute;
-    width: 100px;
+    width: 70px;
     height: 100%;
-    background: #4b6b77;
+    background: #ffffff;
     left: 0;
     top: 0;
     display: flex;

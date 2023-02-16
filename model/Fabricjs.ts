@@ -7,20 +7,23 @@ export default class Frabric {
   private width: number = 800;
   private height: number = 800;
   private image: fabric.Image;
+  private meshName: string;
   // --- khởi tạo cần
-  constructor(canvas: HTMLCanvasElement, canvasExport: HTMLCanvasElement) {
+  constructor(canvas: HTMLCanvasElement, canvasExport: HTMLCanvasElement,meshName:string) {
+    this.meshName = meshName
     this.CustomFrabricJs();
     this.Init(canvas, canvasExport);
   }
   private Init(canvas: HTMLCanvasElement, canvasExport: HTMLCanvasElement) {
     this.canvas = new fabric.Canvas(canvas);
+  
     this.canvasExport = new fabric.StaticCanvas(canvasExport);
     this.canvas.setBackgroundColor(
       "#ffffff",
       this.canvas.renderAll.bind(this.canvas)
     );
     this.canvasExport.setBackgroundColor(
-      "#ffffff",
+      "#c5c9d4",
       this.canvasExport.renderAll.bind(this.canvas)
     );
     this.canvas.controlsAboveOverlay = true;
@@ -81,6 +84,7 @@ export default class Frabric {
       this.image = image;
       this.canvas.insertAt(image, 1);
       this.canvas.setActiveObject(image);
+      this.ExportImage()
     });
   }
   /**
@@ -89,9 +93,9 @@ export default class Frabric {
    * @returns An object with the properties width, height, left, and top.
    */
   private ResizeImage(Image: fabric.Image) {
-    var scale: number = 400 / Number(Image.width),
-      left: number = 200,
-      top: number = 100;
+    var scale: number = 300 / Number(Image.width),
+      left: number = 250,
+      top: number = 200;
     // =====
     return {
       left,
@@ -121,12 +125,22 @@ export default class Frabric {
         this.ExportImage();
       });
     });
+    this.canvas.on("object:added", (e: any) => {
+      this.image.clone((img: any) => {
+        this.canvasExport.remove(this.canvasExport.item(0));
+        this.canvasExport.add(img);
+        this.ExportImage();
+      });
+    });
   }
   async ExportImage() {
     if (this.canvasExport) {
       window.dispatchEvent(
         new CustomEvent("export:image", {
-          detail: this.canvasExport.toCanvasElement(),
+          detail:{
+            meshName : this.meshName,
+            canvas: this.canvasExport.toCanvasElement()
+          },
         })
       );
     }

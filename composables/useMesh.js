@@ -2,16 +2,7 @@ export default function useMesh() {
   const meshSelected = useState("meshSelected", () => ({
     name: "Font",
     meshName: "A",
-    canvasExport: {
-      x: 2,
-      y: 3,
-      w: 4,
-      h: 5,
-    },
     link: "/Women T-Shirt/overlay/front.png",
-    canvas: null,
-    canvas_export:null,
-    image: '/img/anh.jpeg',
   }));
 
   const meshList = useState("meshList", () => [
@@ -73,7 +64,7 @@ export default function useMesh() {
     },
     {
       name: "Collar",
-      meshName: "E",
+      meshName: "E_1",
       canvasExport: {
         x: 2,
         y: 3,

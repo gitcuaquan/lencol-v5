@@ -1,22 +1,21 @@
 <template>
     <div>
-
         <div class="position-relative">
             <div ref="wapperThree" class="wapper-canvas">
                 <canvas ref="main"></canvas>
             </div>
             <div class="lf--wapper-tool_photo">
-                <button @click="CreatePhoto([0, 0, -1.3],[-3.2, 0, 3.15])" class="btn btn-outline-danger rounded-0 fs-6 d-flex align-items-center me-2">
+                <button @click="CreatePhoto([0,0, 1.3],[0,0,0])" class="btn btn-outline-danger rounded-0 d-flex align-items-center me-2">
+                    <img src="/img/camera-icon.svg" width="20" alt="" class="me-2"> Font
+                </button>
+                <button @click="CreatePhoto([0, 0, -1.3],[-3.15, 0, 3.15])" class="btn btn-outline-danger rounded-0 d-flex align-items-center me-2">
                     <img src="/img/camera-icon.svg" width="20" alt="" class="me-2"> Back
                 </button>
-                <button @click="CreatePhoto([1.3,0.05,0],[-29.7,77,-26.9])" class="btn btn-outline-danger rounded-0 fs-6 d-flex align-items-center me-2">
-                    <img src="/img/camera-icon.svg" width="20" alt="" class="me-2"> Right
-                </button>
-                <button @click="CreatePhoto([-1.3,-0.05, 0],[29.7,-77,-26.8])" class="btn btn-outline-danger rounded-0 fs-6 d-flex align-items-center me-2">
+                <button @click="CreatePhoto([-1.3,-0.05, 0],[29.7,-77,-26.8])" class="btn btn-outline-danger rounded-0 d-flex align-items-center me-2">
                     <img src="/img/camera-icon.svg" width="20" alt="" class="me-2"> Left
                 </button>
-                <button @click="CreatePhoto([0,0, 1.3],[0,0,0])" class="btn btn-outline-danger rounded-0 fs-6 d-flex align-items-center me-2">
-                    <img src="/img/camera-icon.svg" width="20" alt="" class="me-2"> Font
+                <button @click="CreatePhoto([1.3,0.05,0],[-29.7,77,-26.9])" class="btn btn-outline-danger rounded-0 d-flex align-items-center me-2">
+                    <img src="/img/camera-icon.svg" width="20" alt="" class="me-2"> Right
                 </button>
             </div>
         </div>
