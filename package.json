@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@types/fabric": "^4.5.15",
     "@types/three": "^0.149.0",
     "nuxt": "^3.1.2"
   },

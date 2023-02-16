@@ -140,7 +140,7 @@ export default class ThreeJS {
    */
   public Image3dTo2d(position?: Array<number>, rotation?: Array<number>) {
     if (position && rotation) {
-      var camera1 = new THREE.PerspectiveCamera(40, this.ratio, 0.1, 100000);
+      var camera1 = new THREE.PerspectiveCamera(35, this.ratio, 0.1, 100000);
       if (position) {
         camera1.position.set(position[0], position[1], position[2]);
       }
